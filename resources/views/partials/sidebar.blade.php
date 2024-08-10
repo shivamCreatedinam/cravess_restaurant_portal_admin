@@ -43,7 +43,7 @@
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#restaurant">
                         <i class="fas fa-utensils"></i>
-                        <p>Restaurants</p>
+                        <p>Manage Products</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="restaurant">
@@ -68,23 +68,6 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#users">
-                        <i class="fas fa-users"></i>
-                        <p>Users</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="users">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="{{ route('admin_user_list') }}">
-                                    <span class="sub-item">User List</span>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
 
                 {{-- <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#submenu">

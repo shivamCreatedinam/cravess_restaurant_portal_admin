@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Restaurant Login</title>
     <link rel="icon" href="{{ asset('public/assets/img/kaiadmin/favicon1.png') }}" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
@@ -128,20 +128,22 @@
                 alt="">
         </div>
         <div class="text-center mt-4 name">
-            Login
+           Restaurant Login
         </div>
+        @include('status')
         <form action="{{ route('loginPost') }}" method="post" class="p-3 mt-3">
             @csrf
             <div class="form-field d-flex align-items-center">
                 <span class="far fa-user"></span>
-                <input type="text" name="email" id="userName" placeholder="Email">
+                <input type="email" name="email" id="userName" placeholder="Email" value="{{ request()->query('email') }}"
+                @if(request()->has('email')) readonly @endif autocomplete="off">
             </div>
             @error('email')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
-                <input type="password" name="password" id="pwd" placeholder="Password">
+                <input type="password" name="password" id="pwd" placeholder="Password" autocomplete="off">
             </div>
             @error('password')
                 <span class="text-danger">{{ $message }}</span>
