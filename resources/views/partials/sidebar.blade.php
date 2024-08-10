@@ -41,26 +41,76 @@
                 </li>
 
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#restaurant">
+                    <a data-bs-toggle="collapse" href="#categories">
+                        <i class="fas fa-utensils"></i>
+                        <p>Manage Categories</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="categories">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Add New Category</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">List Categories</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#products">
                         <i class="fas fa-utensils"></i>
                         <p>Manage Products</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="restaurant">
+                    <div class="collapse" id="products">
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="#">
-                                    <span class="sub-item">Add New Restaurant</span>
+                                    <span class="sub-item">Add New Product</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('resto_pending_list') }}">
-                                    <span class="sub-item">Pending for Approval</span>
+                                <a href="#">
+                                    <span class="sub-item">List Of Products</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('resto_list') }}">
-                                    <span class="sub-item">Restaurants List</span>
+                                <a href="#">
+                                    <span class="sub-item">Disabled Products</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#orders">
+                        <i class="fas fa-utensils"></i>
+                        <p>Manage Orders</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="orders">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Pending Orders</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Fulfilled Orders</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Cancelled Orders</span>
                                 </a>
                             </li>
 
