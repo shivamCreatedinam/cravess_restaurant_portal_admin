@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class ProductChildCategory extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
+    public function getChildCatIconAttribute($value)
+    {
+        if ($value) {
+            return url('storage/app/public/' . $value);
+        }
+        return null;
+        // return url('public/assets/img/dummy.png');
+    }
 }

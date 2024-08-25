@@ -1,5 +1,5 @@
 @extends('partials.app')
-@section('title', 'Users List')
+@section('title', 'Products List')
 @section('container')
     <div class="container">
 
@@ -16,7 +16,7 @@
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin_user_list') }}">Users</a>
+                        <a href="{{ route('child_cat_list') }}">Product List</a>
                     </li>
 
                 </ul>
@@ -28,20 +28,28 @@
                 @include('status')
             </div>
             <div class="card-body">
-                <h4 class="card-title">Users List</h4>
+                <div class="d-flex justify-content-between my-4">
+                    <h4 class="card-title">Products List</h4>
+                    <a href="{{route('product_add_page')}}" class="btn btn-primary btn-sm rounded"><i class="fa fa-plus"></i> Add New Product</a>
+                </div>
 
                 {{-- <input type="checkbox" checked data-toggle="toggle" data-width="100" data-height="75" data-onlabel="Active" data-offlabel="Block" data-onstyle="success" data-offstyle="danger"> --}}
 
 
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover text-center" id="userListTable"
+                    <table class="table table-striped table-bordered table-hover text-center" id="productTable"
                         style="width: 100%">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">Mobile</th>
+                                <th class="text-center">Item Name</th>
+                                <th class="text-center">Category Name</th>
+                                <th class="text-center">Sub Category Name</th>
+                                <th class="text-center">Child Category Name</th>
+                                <th class="text-center">Item Type</th>
+                                <th class="text-center">Daily Availibility</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Images</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -61,7 +69,7 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            var table = $('#userListTable').DataTable({
+            var table = $('#productTable').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
@@ -69,7 +77,7 @@
                 //     [0, "desc"]
                 // ],
                 ajax: {
-                    url: "{{ route('admin_user_list') }}",
+                    url: "{{ route('product_list') }}",
                     type: 'GET'
                 },
                 columns: [{
@@ -77,16 +85,38 @@
                         name: 'id'
                     },
                     {
-                        data: 'name',
-                        name: 'name'
+                        data: 'item_name',
+                        name: 'item_name'
                     },
                     {
-                        data: 'email',
-                        name: 'email'
+                        data: 'category',
+                        name: 'category'
                     },
                     {
-                        data: 'mobile_no',
-                        name: 'mobile_no'
+                        data: 'sub_cat_name',
+                        name: 'sub_cat_name'
+                    },
+                    {
+                        data: 'child_cat_name',
+                        name: 'child_cat_name'
+                    },
+                    {
+                        data: 'item_type',
+                        name: 'item_type'
+                    },
+                    {
+                        data: 'daily_availibility',
+                        name: 'daily_availibility'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'images',
+                        name: 'images'
                     },
                     {
                         data: 'actions',

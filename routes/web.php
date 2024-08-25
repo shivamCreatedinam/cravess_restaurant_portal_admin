@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ProductChildCategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,26 +26,27 @@ Route::post("login", [AuthController::class, "loginPost"])->name("loginPost");
 Route::get("header", [HomeController::class, "printHeaders"]);
 
 
-Route::group(['prefix' => 'resto','middleware' => 'auth:web'], function () {
+Route::group(['middleware' => 'auth:web'], function () {
 
     Route::get('/dashboard', [HomeController::class, "dashboard"])->name("dashboard");
 
-    Route::group(['prefix' => 'user'], function () {
-        Route::get('/user-list', [UserController::class, "userList"])->name("admin_user_list");
-        Route::get('/user-view/{user_id}', [UserController::class, "userView"])->name("admin_user_view");
-        Route::get('/user-edit/{user_id}', [UserController::class, "userEdit"])->name("admin_user_edit");
-        Route::post('/user-update', [UserController::class, "userUpdate"])->name("admin_user_update");
+    Route::group(['prefix' => 'child'], function () {
+        Route::get('/category-list', [ProductChildCategoryController::class, "index"])->name("child_cat_list");
+        Route::get('/add-category', [ProductChildCategoryController::class, "createPage"])->name("child_cat_add");
+        Route::post('/get-sub-category', [ProductChildCategoryController::class, "getSubCategory"])->name("get_sub_category");
+        Route::post('/get-child-category', [ProductChildCategoryController::class, "getChildCategory"])->name("get_child_category");
+        Route::post('/store-child-category', [ProductChildCategoryController::class, "storeChildCategory"])->name("store_child_category");
+        Route::get('/edit-child-category/{id}', [ProductChildCategoryController::class, "editChildCategory"])->name("edit_child_category");
+        Route::post('/update-child-category', [ProductChildCategoryController::class, "updateChildCategory"])->name("update_child_category");
+        Route::get('/delete-child-category/{id}', [ProductChildCategoryController::class, "deleteChildCategory"])->name("delete_child_category");
     });
 
-    Route::group(['prefix' => 'resto'], function () {
-        Route::get('/pending-list', [RestaurantController::class, "pending_list"])->name("resto_pending_list");
-        Route::get('/list', [RestaurantController::class, "index"])->name("resto_list");
-        Route::get('/resto-view-pending/{user_id}', [RestaurantController::class, "restoViewPending"])->name("resto_view_pending");
-        Route::get('/resto-view/{user_id}', [RestaurantController::class, "restoView"])->name("resto_view");
-        Route::get('/resto-edit/{user_id}', [RestaurantController::class, "restoEdit"])->name("resto_edit");
-        Route::post('/user-update', [UserController::class, "userUpdate"])->name("admin_user_update");
-        Route::post('/user-status-update', [UserController::class, "userStatusUpdate"])->name("admin_user_status_update");
-        Route::post('/resto-approve', [RestaurantController::class, "restoApprove"])->name("resto_approve");
+    Route::group(['prefix' => 'product'], function () {
+        Route::get('/list', [ProductController::class, "index"])->name("product_list");
+        Route::get('/add', [ProductController::class, "addPage"])->name("product_add_page");
+        Route::post('/store', [ProductController::class, "storeItem"])->name("store_new_item");
+        Route::get('/image-upload/{product_id}', [ProductController::class, "productImageUpload"])->name("product_image_upload");
+        Route::post('/image-upload', [ProductController::class, "productImageUploadPost"])->name("product_image_upload_post");
     });
 
     Route::get("logout", [AuthController::class, "logout"])->name("admin_logout");

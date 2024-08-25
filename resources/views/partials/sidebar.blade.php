@@ -49,12 +49,12 @@
                     <div class="collapse" id="categories">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="#">
+                                <a href="{{ route('child_cat_add') }}">
                                     <span class="sub-item">Add New Category</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ route('child_cat_list') }}">
                                     <span class="sub-item">List Categories</span>
                                 </a>
                             </li>
@@ -64,19 +64,19 @@
 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#products">
-                        <i class="fas fa-utensils"></i>
+                        <i class="fab fa-product-hunt"></i>
                         <p>Manage Products</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="products">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="#">
+                                <a href="{{ route('product_add_page') }}">
                                     <span class="sub-item">Add New Product</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('product_list')}}">
                                     <span class="sub-item">List Of Products</span>
                                 </a>
                             </li>
@@ -92,7 +92,7 @@
 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#orders">
-                        <i class="fas fa-utensils"></i>
+                        <i class="fab fa-shop"></i>
                         <p>Manage Orders</p>
                         <span class="caret"></span>
                     </a>
