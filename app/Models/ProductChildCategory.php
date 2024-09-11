@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductChildCategory extends Model
 {
     use HasFactory;
+    protected $connection = 'mysql'; // Main database connection
     protected $guarded = [];
 
     public function getChildCatIconAttribute($value)

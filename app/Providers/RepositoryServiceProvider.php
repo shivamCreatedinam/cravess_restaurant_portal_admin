@@ -3,16 +3,14 @@
 namespace App\Providers;
 
 use App\Interfaces\CommonServiceInterface;
+use App\Interfaces\ProductInterface;
 use App\Interfaces\RestaurantAuthInterface;
 use App\Interfaces\RestaurantCommonInterface;
-use App\Interfaces\RestaurantKycInterface;
-use App\Interfaces\UserInterface;
-use App\Models\User;
+use App\Models\Product;
 use App\Repositories\CommonServiceRepository;
-use App\Repositories\EloquentUserRepository;
+use App\Repositories\EloquentProductRepository;
 use App\Repositories\RestaurantAuthRepository;
 use App\Repositories\RestaurantCommonRepository;
-use App\Repositories\RestaurantKycRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -22,13 +20,16 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(UserInterface::class, function () {
-            return new EloquentUserRepository(new User());
-        });
+        // $this->app->singleton(UserInterface::class, function () {
+        //     return new EloquentUserRepository(new User());
+        // });
         $this->app->singleton(CommonServiceInterface::class, CommonServiceRepository::class);
         $this->app->singleton(RestaurantAuthInterface::class, RestaurantAuthRepository::class);
-        $this->app->singleton(RestaurantKycInterface::class, RestaurantKycRepository::class);
         $this->app->singleton(RestaurantCommonInterface::class, RestaurantCommonRepository::class);
+
+        $this->app->singleton(ProductInterface::class, function () {
+            return new EloquentProductRepository(new Product());
+        });
     }
 
     /**

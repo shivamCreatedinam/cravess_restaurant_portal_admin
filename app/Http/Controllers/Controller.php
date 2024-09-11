@@ -7,7 +7,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- * @OA\Info(title="Cravess Food APP APIs", version="1")
+ * @OA\Info(title="Cravess Food APP Restaurant APIs", version="1")
  */
 
 class Controller extends BaseController
