@@ -70,21 +70,6 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function aadharVerification()
-    {
-        return $this->hasOne(UserAadharVerification::class, 'user_id');
-    }
-
-    public function panVerification()
-    {
-        return $this->hasOne(UserPanCardVerification::class, 'user_id');
-    }
-
-    public function bankDetails()
-    {
-        return $this->hasMany(UserBankDetails::class, 'user_id');
-    }
-
     public function defaultBankAccount()
     {
         return $this->bankDetails()->where('is_default', 1)->first();
@@ -99,19 +84,9 @@ class User extends Authenticatable implements JWTSubject
         return null;
     }
 
-    public function restoDetails()
+    public function store()
     {
         return $this->hasOne(StoreDetails::class, 'user_id');
-    }
-
-    public function restoMedia()
-    {
-        return $this->hasOne(StoreMedia::class, 'user_id');
-    }
-
-    public function restoVerifications()
-    {
-        return $this->hasOne(StoreVerification::class, 'user_id');
     }
 
 }

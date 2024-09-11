@@ -8,6 +8,7 @@ use App\Models\ProductChildCategory;
 use App\Traits\ImageUploadTrait;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -42,7 +43,7 @@ class ProductController extends Controller
 
 
                 $status = $product->status === 1 ? "<span class='badge text-bg-success'>Active</span>" : "<span class='badge text-bg-danger'>Disable</span>";
-                $img_btn = "<a href='".route('product_image_upload',['product_id',$product->id])."' class='btn btn-primary btn-sm rounded'>Images</a>";
+                $img_btn = "<a href='" . route('product_image_upload', ['product_id', $product->id]) . "' class='btn btn-primary btn-sm rounded'>Images</a>";
                 // fetch trade status
                 $return[] = [
                     'id' => $key + 1,
@@ -93,6 +94,7 @@ class ProductController extends Controller
         try {
 
             Product::create([
+                "restaurant_id" => Auth::user()->uuid,
                 "category_id" => $request->category_id,
                 "sub_category_id" => $request->sub_category_id,
                 "child_category_id" => $request->child_category_id,
@@ -102,7 +104,7 @@ class ProductController extends Controller
                 "is_featured" => $request->is_featured,
                 "daily_availibility" => $request->daily_availibility,
                 "item_type" => $request->item_type,
-                "available_days" => json_encode($request->available_days,true),
+                "available_days" => json_encode($request->available_days, true),
             ]);
             return redirect()->back()->with('success', ucfirst($request->item_name) . " successfully created.");
         } catch (Exception $e) {
@@ -110,11 +112,10 @@ class ProductController extends Controller
         }
     }
 
-    public function productImageUpload($product_id){
-        return view('products.image',compact('product_id'));
+    public function productImageUpload($product_id)
+    {
+        return view('products.image', compact('product_id'));
     }
 
-    public function productImageUploadPost(Request $request){
-        
-    }
+    public function productImageUploadPost(Request $request) {}
 }

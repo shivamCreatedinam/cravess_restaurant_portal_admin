@@ -50,6 +50,12 @@ class ProductController extends Controller
      *                     property="child_category_id",
      *                     type="integer",
      *                     description="Filter products by child category ID"
+     *                 ),
+     *                  @OA\Property(
+     *                     property="restaurant_id",
+     *                     type="string",
+     *                     example="dfb8464f-e2f6-4ae0-9f40-b525b688ecaf",
+     *                     description="Filter products by restaurant"
      *                 )
      *             )
      *         )
@@ -72,6 +78,7 @@ class ProductController extends Controller
             "sub_category_id" => "nullable|numeric",
             "child_category_id" => "nullable|numeric",
             "per_page_item" => "nullable|numeric",
+            "restaurant_id" => "nullable",
         ]);
 
         if ($validator->fails()) {
@@ -82,6 +89,7 @@ class ProductController extends Controller
         $sub_category_id = null;
         $child_category_id = null;
         $featured = null;
+        $restaurant_id = null;
         $per_page_item = 50;
 
         if ($request->has("is_featured") && !empty($request->is_featured)) {
@@ -104,46 +112,10 @@ class ProductController extends Controller
             $per_page_item = $request->per_page_item;
         }
 
-        if ($request->has("per_page_item") && !empty($request->per_page_item) && $request->per_page_item != 0) {
-            $per_page_item = $request->per_page_item;
+        if ($request->has("restaurant_id") && !empty($request->restaurant_id)) {
+            $restaurant_id = $request->restaurant_id;
         }
 
-        return $this->productInterface->getAllproducts($featured, $category_id, $sub_category_id, $child_category_id, $per_page_item, $per_page_item);
+        return $this->productInterface->getAllproducts($featured, $category_id, $sub_category_id, $child_category_id, $restaurant_id, $per_page_item);
     }
-
-    // public function getCategoryWiseProduct(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         "category_id" => "nullable|numeric",
-    //         "sub_category_id" => "nullable|numeric",
-    //         "child_category_id" => "nullable|numeric",
-    //         "per_page_item" => "nullable|numeric",
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return $this->validationErrorResponse($validator->errors()->first());
-    //     }
-
-    //     $category_id = null;
-    //     $sub_category_id = null;
-    //     $child_category_id = null;
-    //     $per_page_item = 50;
-    //     if ($request->has("category_id") && !empty($request->category_id) && $request->category_id != 0) {
-    //         $category_id = $request->category_id;
-    //     }
-
-    //     if ($request->has("sub_category_id") && !empty($request->sub_category_id) && $request->sub_category_id != 0) {
-    //         $sub_category_id = $request->sub_category_id;
-    //     }
-
-    //     if ($request->has("child_category_id") && !empty($request->child_category_id) && $request->child_category_id != 0) {
-    //         $child_category_id = $request->child_category_id;
-    //     }
-
-    //     if ($request->has("per_page_item") && !empty($request->per_page_item) && $request->per_page_item != 0) {
-    //         $per_page_item = $request->per_page_item;
-    //     }
-
-    //     return $this->productInterface->getCategoryWiseProduct($category_id,$sub_category_id,$child_category_id,$per_page_item);
-    // }
 }

@@ -16,7 +16,7 @@ class EloquentProductRepository extends EloquentBaseRepository implements Produc
     use ApiResponseTrait;
     use ImageUploadTrait;
 
-    public function getAllproducts($featured, $category_id, $sub_category_id, $child_category_id, $per_page_item)
+    public function getAllproducts($featured, $category_id, $sub_category_id, $child_category_id, $restaurant_id, $per_page_item)
     {
         try {
             // Initialize the query
@@ -56,6 +56,10 @@ class EloquentProductRepository extends EloquentBaseRepository implements Produc
                     'sub_category_id' => $sub_category_id,
                     'child_category_id' => $child_category_id
                 ]);
+            }
+
+            if (!empty($restaurant_id)) {
+                $data->where('restaurant_id', $restaurant_id);
             }
 
             // Paginate the results

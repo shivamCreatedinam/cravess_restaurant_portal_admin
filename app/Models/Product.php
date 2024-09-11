@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory, SoftDeletes;
     protected $guarded = [];
     protected $connection = 'resto_mysql';
-    protected $with = ['category', 'sub_category', 'sub_child_category'];
+    protected $with = ['store', 'category', 'sub_category', 'sub_child_category'];
 
     public function category()
     {
@@ -26,5 +26,9 @@ class Product extends Model
     public function sub_child_category()
     {
         return $this->belongsTo(ProductChildCategory::class, 'child_category_id', 'id');
+    }
+    public function store()
+    {
+        return $this->belongsTo(StoreDetails::class, 'restaurant_id', 'user_id');
     }
 }

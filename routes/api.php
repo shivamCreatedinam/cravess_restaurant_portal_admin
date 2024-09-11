@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Restaurant\ProductController;
+use App\Http\Controllers\Restaurant\RestaurantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'v1'], function () {
 
     Route::post("get-items", [ProductController::class, "allProducts"]);
+    Route::post("get-stores", [RestaurantController::class, "getAllStores"]);
     Route::group(['middleware' => ['jwt']], function () {
     });
 });
